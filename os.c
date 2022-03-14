@@ -51,7 +51,7 @@ void* phys_to_virt(uint64_t phys_addr)
 
 	return va;
 }
-
+/*
 int main(int argc, char **argv)
 {
 	uint64_t pt = alloc_page_frame();
@@ -64,4 +64,4 @@ int main(int argc, char **argv)
 
 	return 0;
 }
-
+*/
