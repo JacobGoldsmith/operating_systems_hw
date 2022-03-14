@@ -12,16 +12,14 @@ uint64_t page_table_query(uint64_t pt, uint64_t vpn){
         actual_pointer_to_table = phys_to_virt(pointer_to_table-1);
         pointer_to_table = actual_pointer_to_table[index_in_table];
         if ((pointer_to_table&1) == 0){
-	    printf("in func %s, line %d,  returning NO_MAPPING \n", __FUNCTION__, __LINE__); 
+	    
             return NO_MAPPING;
         }
-        else if(i == 0){
-           printf("in func %s, returning %lu \n", __FUNCTION__, actual_pointer_to_table[index_in_table]); 
-            return actual_pointer_to_table[index_in_table];
+        else if(i == 0){ 
+            return actual_pointer_to_table[index_in_table]>>12;
         } 
     }
-    
-    printf("in func %s, line %d,  returning NO_MAPPING \n", __FUNCTION__, __LINE__); 
+     
     
     return NO_MAPPING;
 }
@@ -44,7 +42,7 @@ void page_table_update(uint64_t pt, uint64_t vpn, uint64_t ppn){
         actual_pointer_to_table = phys_to_virt(pointer_to_table-1);
         pointer_to_table = actual_pointer_to_table[index_in_table];
         if(i == 0){
-            actual_pointer_to_table[index_in_table] = ppn;
+            actual_pointer_to_table[index_in_table] = (ppn<<12)+1;
             if(ppn == NO_MAPPING){
                 actual_pointer_to_table[index_in_table]=0;
                 for(j = 0; j < 4; j++){
