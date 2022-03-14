@@ -17,6 +17,7 @@ uint64_t page_table_query(uint64_t pt, uint64_t vpn){
             return actual_pointer_to_table[index_in_table];
         } 
     }
+    return NO_MAPPING;
 }
 
 
